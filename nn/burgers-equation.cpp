@@ -2,24 +2,32 @@
 #include <vector>
 #include <bits/stdc++.h>
 #include <stdio.h>
-
+ 
+#define NX_ 41
+#define NY_ 41
+   
 
 using namespace std;
 
-void linspace(vector<float> &v,float start,float stop,float num){
-    v.assign(num,0.0); 
+void linspace(float v[],float start,float stop,float num){
     double delta=((stop-start))/(num-1);
     v[0]=start;
-    for(int i=1;i<v.size();i++){
+    for(int i=1;i<num;i++){
         v[i]=v[i-1]+delta;
     }
 } 
-
-void ones(vector<vector<float> > &m,float height,float width){
-    m.assign(height,vector<float>(width,1));
+void ones(float m[][NX_],float height,float width){
+    for(int i=0;i<height;i++){
+            for(int j=0;j<width;j++){
+                m[i][j]=1;
+            }
+            
+        }
+    
 }
 
-void print_matrix(vector<vector<float> > &m,float height,float width){
+
+void print_matrix(float m[][NX_],float height,float width){
         for(int i=0;i<height;i++){
             for(int j=0;j<width;j++){
                 cout<<"\t"<<m[i][j];
@@ -29,7 +37,7 @@ void print_matrix(vector<vector<float> > &m,float height,float width){
     
 }
 
-void copy(vector<vector<float> > &a,vector<vector<float> > &b,float height,float width){
+void copy(float a[][NX_],float b[][NX_],float height,float width){
     for(int i=0;i<height;i++){
             for(int j=0;j<width;j++){
                 b[i][j]=a[i][j];
@@ -38,12 +46,13 @@ void copy(vector<vector<float> > &a,vector<vector<float> > &b,float height,float
         }
     
 }
-
+//*/
 int main()
 {
     
-    float nx = 8;//41;
-    float ny = 8;//41;
+    float nx = NX_;
+    float ny = NY_;
+   
     float nt = 120;
     float c = 1;
     float dx = 2/(nx-1);
@@ -51,15 +60,17 @@ int main()
     float sigma = 0.0009;
     float nu = 0.01;
     float dt = sigma*dx*dy/(nu);
-    vector<float> x;
-    vector<float> y;
+    float x[NX_];
+    float y[NY_];
     linspace(x,0,2,nx);
     linspace(y,0,2,ny);
-    vector<vector<float> > u;
-    vector<vector<float> > v;
-    vector<vector<float> > un;
-    vector<vector<float> > vn;
-    vector<vector<float> > comb;
+    float u[NY_][NX_];
+    float v[NY_][NX_];
+    float un[NY_][NX_];
+    float vn[NY_][NX_];
+    float comb[NY_][NX_];
+    
+    
     ones(u,ny,nx);
     ones(v,ny,nx);
     ones(un,ny,nx);
@@ -93,21 +104,23 @@ int main()
         
         for(int i=0;i<ny;i++){
             u[i][0]=1;
-            u[i][nx-1]=1;
+            u[i][NX_-1]=1;
             v[i][0]=1;
-            v[i][nx-1]=1;
+            v[i][NX_-1]=1;
             
         }
         for(int i=0;i<nx;i++){
             u[0][i]=1;
-            u[ny-1][i]=1;
+            u[NY_-1][i]=1;
             v[0][i]=1;
-            v[ny-1][i]=1;
+            v[NY_-1][i]=1;
         }
     }
     
     ///-------------------Grafica 2------------------
     print_matrix(v,ny,nx);
+    
+    //*/
     return 0;
 }
 /*
