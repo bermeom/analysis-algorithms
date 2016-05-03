@@ -40,7 +40,7 @@ for n in range(nt+1): ##loop across number of time steps
     vn = v.copy()
     
     u[1:-1,1:-1] = un[1:-1,1:-1] - dt/dx*un[1:-1,1:-1]*(un[1:-1,1:-1]-un[1:-1,0:-2])-dt/dy*vn[1:-1,1:-1]* \
-                   (un[1:-1,1:-1]-un[0:-2,1:-1])+nu*dt/dx**2*(un[1:-1,2:]-2*un[1:-1,1:-1]+un[1:-1,0:-2])+ \
+                   (un[1:-1,1:-1]-un[0:-2,1:-1])+nu*dt/dx*2*(un[1:-1,2:]-2*un[1:-1,1:-1]+un[1:-1,0:-2])+ \
                    nu*dt/dy*2*(un[2:,1:-1]-2*un[1:-1,1:-1]+un[0:-2,1:-1])
     
     v[1:-1,1:-1] = vn[1:-1,1:-1] - dt/dx*un[1:-1,1:-1]*(vn[1:-1,1:-1]-vn[1:-1,0:-2])-dt/dy*vn[1:-1,1:-1]* \
@@ -57,4 +57,4 @@ for n in range(nt+1): ##loop across number of time steps
     v[:,0] = 1
     v[:,-1] = 1
  
-print_matrix(v)
+print_matrix(u)
