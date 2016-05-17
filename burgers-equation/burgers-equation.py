@@ -2,6 +2,7 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 from matplotlib import pyplot
 import numpy
+#matplotlib inline
 
 def print_matrix( matrix ):
     s = [[str(e) for e in row] for row in matrix]
@@ -33,6 +34,13 @@ comb = numpy.ones((ny,nx))
 
 u[.5/dy:1/dy+1,.5/dx:1/dx+1]=2 ##set hat function I.C. : u(.5<=x<=1 && .5<=y<=1 ) is 2
 v[.5/dy:1/dy+1,.5/dx:1/dx+1]=2 ##set hat function I.C. : u(.5<=x<=1 && .5<=y<=1 ) is 2
+
+fig = pyplot.figure(figsize=(11,7), dpi=100)
+ax = fig.gca(projection='3d')
+X,Y = numpy.meshgrid(x,y)
+wire1 = ax.plot_wireframe(X,Y,u[:], cmap=cm.coolwarm)
+wire2 = ax.plot_wireframe(X,Y,v[:], cmap=cm.coolwarm)
+
 
 #print_matrix(v)
 for n in range(nt+1): ##loop across number of time steps
